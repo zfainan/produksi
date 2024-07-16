@@ -276,11 +276,11 @@
             <ul class="sidebar-nav" id="sidebar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">
+                    <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                         <i class="bi bi-grid"></i>
                         <span>Dashboard</span>
                     </a>
-                </li><!-- End Dashboard Nav -->
+                </li>
 
                 <li class="nav-heading">Administrator</li>
 
@@ -292,22 +292,22 @@
                     </a>
                     <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="{{ route('users.index') }}">
+                            <a class="nav-link collapsed" href="{{ route('users.index') }}">
                                 <i class="bi bi-circle"></i><span>Pengguna</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('produk.index') }}">
+                            <a class="nav-link collapsed" href="{{ route('produk.index') }}">
                                 <i class="bi bi-circle"></i><span>Produk</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('bahan-baku.index') }}">
+                            <a class="nav-link collapsed" href="{{ route('bahan-baku.index') }}">
                                 <i class="bi bi-circle"></i><span>Bahan Baku</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('pelanggan.index') }}">
+                            <a class="nav-link collapsed" href="{{ route('pelanggan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pelanggan</span>
                             </a>
                         </li>
@@ -322,7 +322,7 @@
                     </a>
                     <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="{{ route('pesanan.index') }}">
+                            <a class="nav-link collapsed" href="{{ route('pesanan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>
                         </li>
@@ -336,7 +336,7 @@
                     </a>
                     <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="#">
+                            <a class="nav-link collapsed" href="#">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>
                         </li>
