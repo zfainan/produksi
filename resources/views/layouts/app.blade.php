@@ -322,7 +322,7 @@
                     </a>
                     <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="#">
+                            <a href="{{ route('pesanan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>
                         </li>

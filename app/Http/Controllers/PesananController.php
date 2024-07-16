@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\pesanan;
+use App\Models\Pelanggan;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
@@ -14,7 +15,9 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
+        $data = Pesanan::with('pelanggan')->latest()->get();
+
+        return view('pesanan.index', compact('data'));
     }
 
     /**
@@ -22,7 +25,9 @@ class PesananController extends Controller
      */
     public function create()
     {
-        //
+        $pelanggan = Pelanggan::all();
+
+        return view('pesanan.create', compact('pelanggan'));
     }
 
     /**
@@ -30,7 +35,18 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_pelanggan' => 'required|exists:pelanggan,id_pelanggan',
+            'tanggal_pesan' => 'required|date',
+            'tanggal_permintaan' => 'required|date',
+            'tipe_pesanan' => 'required|max:50',
+        ]);
+
+        $pesanan = new Pesanan();
+        $pesanan->fill($request->all());
+        $pesanan->save();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan created successfully.');
     }
 
     /**
@@ -38,7 +54,7 @@ class PesananController extends Controller
      */
     public function show(pesanan $pesanan)
     {
-        //
+        return view('pesanan.show', compact('pesanan'));
     }
 
     /**
@@ -46,7 +62,9 @@ class PesananController extends Controller
      */
     public function edit(pesanan $pesanan)
     {
-        //
+        $pelanggan = Pelanggan::all();
+
+        return view('pesanan.edit', compact('pesanan', 'pelanggan'));
     }
 
     /**
@@ -54,7 +72,17 @@ class PesananController extends Controller
      */
     public function update(Request $request, pesanan $pesanan)
     {
-        //
+        $request->validate([
+            'id_pelanggan' => 'required|exists:pelanggan,id_pelanggan',
+            'tanggal_pesan' => 'required|date',
+            'tanggal_permintaan' => 'required|date',
+            'tipe_pesanan' => 'required|max:50',
+        ]);
+
+        $pesanan->fill($request->all());
+        $pesanan->save();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan updated successfully.');
     }
 
     /**
@@ -62,6 +90,8 @@ class PesananController extends Controller
      */
     public function destroy(pesanan $pesanan)
     {
-        //
+        $pesanan->delete();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan deleted successfully.');
     }
 }
