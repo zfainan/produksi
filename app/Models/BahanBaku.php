@@ -26,4 +26,11 @@ class BahanBaku extends Model
     protected $table = 'bahan_baku';
 
     protected $primaryKey = 'id_bahan';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['nama_bahan_baku', 'stok', 'satuan'];
 }

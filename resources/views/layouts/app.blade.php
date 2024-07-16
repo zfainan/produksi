@@ -293,22 +293,22 @@
                     <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('users.index') }}">
-                                <i class="bi bi-circle"></i><span>Data Pengguna</span>
+                                <i class="bi bi-circle"></i><span>Pengguna</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="bi bi-circle"></i><span>Data Produk</span>
+                            <a href="{{ route('produk.index') }}">
+                                <i class="bi bi-circle"></i><span>Produk</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="bi bi-circle"></i><span>Data Bahan Baku</span>
+                            <a href="{{ route('bahan-baku.index') }}">
+                                <i class="bi bi-circle"></i><span>Bahan Baku</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="bi bi-circle"></i><span>Data Pelanggan</span>
+                            <a href="{{ route('pelanggan.index') }}">
+                                <i class="bi bi-circle"></i><span>Pelanggan</span>
                             </a>
                         </li>
                     </ul>
@@ -317,7 +317,8 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse"
                         href="#">
-                        <i class="bi bi-journal-text"></i><span>Transaksi</span><i class="bi bi-chevron-down ms-auto"></i>
+                        <i class="bi bi-journal-text"></i><span>Transaksi</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <li>

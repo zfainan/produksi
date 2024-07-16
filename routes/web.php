@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
 
     Route::resource('produk', ProdukController::class);
+
+    Route::resource('bahan-baku', BahanBakuController::class);
+
+    Route::resource('pelanggan', PelangganController::class);
 });
 
 Auth::routes(['register' => false, 'reset' => false]);
