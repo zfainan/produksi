@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\KemasanEnum;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class ProdukController extends Controller
 {
@@ -12,7 +14,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        //
+        $data = Produk::latest()->get();
+
+        return view('produk.index', compact('data'));
     }
 
     /**
@@ -20,7 +24,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        //
+        return view('produk.create');
     }
 
     /**
@@ -28,7 +32,17 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_produk' => 'required|max:100',
+            'kemasan' => ['required', new Enum(KemasanEnum::class)],
+            'harga' => 'required|integer',
+        ]);
+
+        $produk = new Produk();
+        $produk->fill($request->all());
+        $produk->save();
+
+        return redirect()->route('produk.index')->with('success', 'Produk created successfully.');
     }
 
     /**
@@ -36,7 +50,7 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        //
+        return view('produk.show', compact('produk'));
     }
 
     /**
@@ -44,7 +58,7 @@ class ProdukController extends Controller
      */
     public function edit(Produk $produk)
     {
-        //
+        return view('produk.edit', compact('produk'));
     }
 
     /**
@@ -52,7 +66,16 @@ class ProdukController extends Controller
      */
     public function update(Request $request, Produk $produk)
     {
-        //
+        $request->validate([
+            'nama_produk' => 'required|max:100',
+            'kemasan' => 'required|max:50',
+            'harga' => 'required|integer',
+        ]);
+
+        $produk->fill($request->all());
+        $produk->save();
+
+        return redirect()->route('produk.index')->with('success', 'Produk updated successfully.');
     }
 
     /**
@@ -60,6 +83,8 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        $produk->delete();
+
+        return redirect()->route('produk.index')->with('success', 'Produk deleted successfully.');
     }
 }
