@@ -13,13 +13,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  *
- * @property int                             $id_pesanan
- * @property int                             $id_pelanggan
- * @property string                          $tanggal_pesan
- * @property string                          $tanggal_permintaan
- * @property string                          $tipe_pesanan
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property      int                             $id_pesanan
+ * @property      int                             $id_pelanggan
+ * @property      string                          $tanggal_pesan
+ * @property      string                          $tanggal_permintaan
+ * @property      string                          $tipe_pesanan
+ * @property      \Illuminate\Support\Carbon|null $created_at
+ * @property      \Illuminate\Support\Carbon|null $updated_at
+ * @property      int|null                        $pelanggans_count
+ * @property-read \App\Models\Pelanggan|null      $pelanggan
  */
 class Pesanan extends Model
 {
