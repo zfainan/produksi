@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     // Generate PHPDoc properties for relation methods
     'relations' => [

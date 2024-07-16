@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Enums\JabatanEnum;
@@ -16,6 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('user.index', compact('users'));
     }
 
@@ -81,7 +84,7 @@ class UserController extends Controller
             'alamat' => 'required',
             'no_hp' => 'required|max:20',
             'jabatan' => ['required', Rule::enum(JabatanEnum::class)],
-            'email' => 'required|unique:users,email,' . $user->id,
+            'email' => 'required|unique:users,email,'.$user->id,
             'password' => 'nullable|confirmed',
         ]);
 

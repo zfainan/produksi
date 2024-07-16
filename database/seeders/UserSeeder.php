@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Enums\JabatanEnum;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class UserSeeder extends Seeder
                 ->where('email', sprintf('%s@example.com', Str::snake($role)))
                 ->first();
 
-            if (!$user?->id) {
+            if (! $user?->id) {
                 User::factory()->create([
                     'jabatan' => $role,
                     'email' => sprintf('%s@example.com', Str::snake($role)),

@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $id_produk
- * @property string $nama_produk
- * @property string $kemasan
- * @property int $harga
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Database\Factories\ProdukFactory<self> factory($count = null, $state = [])
  *
  * @mixin \Illuminate\Database\Eloquent\Model
+ *
+ * @property int                             $id_produk
+ * @property string                          $nama_produk
+ * @property string                          $kemasan
+ * @property int                             $harga
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  */
 class Produk extends Model
 {
