@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_pelanggan');
             $table->string('nama', 100);
             $table->text('alamat');
-            $table->string('email', 20);
+            $table->string('email', 50);
             $table->string('no_hp', 20);
             $table->timestamps();
         });
