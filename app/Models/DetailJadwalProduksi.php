@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
  *
- * @property int                             $id_detail
- * @property int                             $id_jadwal
- * @property int                             $id_pesanan
- * @property float                           $flow_time
- * @property float                           $lateness
- * @property float                           $processing_time
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property      int                             $id_detail
+ * @property      int                             $id_jadwal
+ * @property      int|null                        $id_pesanan
+ * @property      float                           $flow_time
+ * @property      float                           $lateness
+ * @property      float                           $processing_time
+ * @property      float                           $due_date
+ * @property      \Illuminate\Support\Carbon|null $created_at
+ * @property      \Illuminate\Support\Carbon|null $updated_at
+ * @property      int|null                        $pesanans_count
+ * @property-read \App\Models\Pesanan|null        $pesanan
  */
 class DetailJadwalProduksi extends Model
 {
