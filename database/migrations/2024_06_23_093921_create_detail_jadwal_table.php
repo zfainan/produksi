@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detail_perhitungan_metodes', function (Blueprint $table) {
-            $table->id('id_detail_perhitungan_metode');
-            $table->unsignedBigInteger('id_perhitungan_metode');
+        Schema::create('detail_jadwal_produksi', function (Blueprint $table) {
+            $table->id('id_detail');
+            $table->unsignedBigInteger('id_jadwal');
+            $table->unsignedBigInteger('id_pesanan');
             $table->double('flow_time');
             $table->double('lateness');
             $table->double('processing_time');
             $table->timestamps();
 
-            $table->foreign('id_perhitungan_metode')->references('id_perhitungan_metode')->on('perhitungan_metode');
+            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal_produksi');
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
         });
     }
 
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detail_perhitungan_metodes');
+        Schema::dropIfExists('detail_jadwal_produksi');
     }
 };

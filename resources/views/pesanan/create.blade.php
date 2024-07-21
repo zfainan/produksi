@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Produk</h1>
+        <h1>Pesanan Pelanggan</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>

@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CreateDetailJadwal;
+use App\Models\DetailJadwalProduksi;
 use App\Models\JadwalProduksi;
+use App\Models\Pesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JadwalProduksiController extends Controller
 {
@@ -14,7 +18,9 @@ class JadwalProduksiController extends Controller
      */
     public function index()
     {
-        //
+        $data = JadwalProduksi::latest()->get();
+
+        return view('jadwal.index', compact('data'));
     }
 
     /**
@@ -22,7 +28,9 @@ class JadwalProduksiController extends Controller
      */
     public function create()
     {
-        //
+        $pesanan = Pesanan::with('pelanggan')->latest()->get();
+
+        return view('jadwal.create', compact('pesanan'));
     }
 
     /**
@@ -30,7 +38,25 @@ class JadwalProduksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal_mulai' => 'date',
+            'pesanan' => 'array|required',
+            'pesanan.*' => 'exists:pesanan,id_pesanan',
+        ]);
+
+        $pesanan = Pesanan::whereIn('id_pesanan', $request->pesanan)
+            ->orderBy('tanggal_permintaan')
+            ->get();
+
+        // TODO: create jadwal
+        // DB::transaction(function () use ($request, $pesanan) {
+        //     $jadwal = JadwalProduksi::create([
+        //         'tanggal_mulai' => $request->tanggal_mulai,
+        //         'tanggal_selesai' => $pesanan->last()->tanggal_permintaan,
+        //     ]);
+
+        //     dispatch_sync(new CreateDetailJadwal($jadwal, $pesanan));
+        // });
     }
 
     /**

@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('jadwal_produksi', function (Blueprint $table) {
             $table->id('id_jadwal');
-            $table->unsignedBigInteger('id_perhitungan');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->timestamps();
-
-            $table->foreign('id_perhitungan')->references('id_perhitungan_metode')->on('perhitungan_metode');
         });
     }
 

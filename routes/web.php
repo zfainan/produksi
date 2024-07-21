@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukController;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('pelanggan', PelangganController::class);
 
     Route::resource('pesanan', PesananController::class);
+
+    Route::resource('jadwal', JadwalProduksiController::class);
 });
 
 Auth::routes(['register' => false, 'reset' => false]);

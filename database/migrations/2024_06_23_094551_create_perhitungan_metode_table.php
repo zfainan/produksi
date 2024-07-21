@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perhitungan_metode', function (Blueprint $table) {
-            $table->id('id_perhitungan_metode');
-            $table->unsignedBigInteger('id_pesanan');
+        Schema::create('perhitungan', function (Blueprint $table) {
+            $table->id('id_perhitungan');
+            $table->unsignedBigInteger('id_jadwal');
             $table->double('rrwp');
             $table->double('rrjp');
             $table->double('utilisasi');
             $table->double('rrwk');
             $table->timestamps();
 
-            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
+            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal_produksi');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perhitungan_metode');
+        Schema::dropIfExists('perhitungan');
     }
 };

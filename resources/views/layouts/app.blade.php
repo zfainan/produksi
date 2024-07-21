@@ -43,7 +43,7 @@
 
             <div class="d-flex align-items-center justify-content-between">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <img src="/assets/img/logo.png" alt="">
+                    <img src="/" alt="">
                     <span class="d-none d-lg-block">NiceAdmin</span>
                 </a>
                 <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -346,13 +346,6 @@
                 <li class="nav-heading">Pages</li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
-                        <i class="bi bi-bag"></i>
-                        <span>Pesanan Pelanggan</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link collapsed" href="#">
                         <i class="bi bi-file-text"></i>
                         <span>Pengajuan Bahan</span>
@@ -360,14 +353,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
-                        <i class="bi bi-percent"></i>
-                        <span>Perhitungan Metode</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
+                    <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
                         <i class="bi bi-calendar-week"></i>
                         <span>Jadwal Produksi</span>
                     </a>

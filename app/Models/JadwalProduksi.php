@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Illuminate\Database\Eloquent\Model
  *
  * @property int                             $id_jadwal
- * @property int                             $id_perhitungan
  * @property string                          $tanggal_mulai
  * @property string                          $tanggal_selesai
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -26,4 +25,11 @@ class JadwalProduksi extends Model
     protected $table = 'jadwal_produksi';
 
     protected $primaryKey = 'id_jadwal';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['tanggal_mulai', 'tanggal_selesai'];
 }
