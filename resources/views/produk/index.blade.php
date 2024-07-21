@@ -6,7 +6,7 @@
             <h1>Produk</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item">Master Data</li>
                     <li class="breadcrumb-item active">Data Produk</li>
                 </ol>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{ $item->nama_produk }}</td>
                                     <td>{{ Str::title($item->kemasan) }}</td>
-                                    <td>{{ $item->harga }}</td>
+                                    <td>Rp {{ $item->harga }}</td>
                                     <td class="d-flex justify-content-center">
                                         <a class="btn btn-sm btn-outline-info me-1"
                                             href="{{ route('produk.show', $item) }}"><i class="bi bi-eye"></i></a>

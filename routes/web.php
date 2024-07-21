@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\DetailPesananController;
+use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PesananController;
@@ -22,6 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
 
     Route::resource('produk', ProdukController::class);
+
+    Route::resource('detail-produk', DetailProdukController::class)
+        ->only(['create', 'store', 'destroy']);
 
     Route::resource('bahan-baku', BahanBakuController::class);
 

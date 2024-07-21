@@ -16,6 +16,14 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+        @session('success')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ $value }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
         <div class="card">
             <div class="card-body">
 
@@ -35,6 +43,60 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 label">Harga</div>
                         <div class="col-lg-9 col-md-8">Rp {{ $produk->harga }}</div>
+                    </div>
+
+                    <div class="d-flex">
+                        <h5 class="card-title">Detail Bahan Baku</h5>
+                        <a href="{{ route('detail-produk.create', [
+                            'id_produk' => $produk->id_produk,
+                        ]) }}"
+                            class="btn btn-primary my-auto ms-auto">
+                            Tambah Bahan Baku
+                        </a>
+                    </div>
+
+                    <div class="table-responsive rounded border p-2">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Bahan Baku</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($produk->detail as $detail)
+                                    <tr>
+                                        <td>{{ $detail->bahan?->nama_bahan_baku }}</td>
+                                        <td>{{ $detail->jumlah }}</td>
+                                        <td>{{ $detail->bahan?->satuan }}</td>
+                                        <td>
+                                            <form action="{{ route('detail-produk.destroy', $detail) }}"
+                                                onsubmit="return confirm('Do you really want to delete the detail?');"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                @if (!count($produk->detail))
+                                    <tr>
+                                        <td colspan="4" class="border-0">
+                                            <p class="text-center">
+                                                Belum ada data
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

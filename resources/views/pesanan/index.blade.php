@@ -6,7 +6,7 @@
             <h1>Pesanan Pelanggan</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                     <li class="breadcrumb-item">Transaksi</li>
                     <li class="breadcrumb-item active">Pesanan Pelanggan</li>
                 </ol>

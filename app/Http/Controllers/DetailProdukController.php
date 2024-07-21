@@ -4,25 +4,26 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanBaku;
 use App\Models\DetailProduk;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class DetailProdukController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if (! $request->filled('id_produk')) {
+            return redirect()->route('pesanan.index');
+        }
+
+        $bahan = BahanBaku::latest()->get();
+        $produk = Produk::findOrFail($request->input('id_produk'));
+
+        return view('detail-produk.create', compact('produk', 'bahan'));
     }
 
     /**
@@ -30,31 +31,17 @@ class DetailProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'id_produk' => 'required|exists:produk,id_produk',
+            'id_bahan' => 'required|exists:bahan_baku,id_bahan',
+            'jumlah' => 'required|integer|min:0',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(DetailProduk $detailProduk)
-    {
-        //
-    }
+        DetailProduk::create($validated);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DetailProduk $detailProduk)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, DetailProduk $detailProduk)
-    {
-        //
+        return redirect()
+            ->route('produk.show', $request->id_produk)
+            ->with('success', 'Detail produk berhasil dibuat');
     }
 
     /**
@@ -62,6 +49,12 @@ class DetailProdukController extends Controller
      */
     public function destroy(DetailProduk $detailProduk)
     {
-        //
+        $produk = $detailProduk->produk;
+
+        $detailProduk->delete();
+
+        return redirect()
+            ->route('produk.show', $produk)
+            ->with('success', 'Detail produk berhasil dihapus');
     }
 }

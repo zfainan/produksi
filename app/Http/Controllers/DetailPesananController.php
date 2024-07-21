@@ -61,22 +61,6 @@ class DetailPesananController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DetailPesanan $detailPesanan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, DetailPesanan $detailPesanan)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(DetailPesanan $detailPesanan)

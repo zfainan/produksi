@@ -78,7 +78,7 @@
                                         <td>{{ $detail->processing_time }} Hari</td>
                                         <td>
                                             <form action="{{ route('detail-pesanan.destroy', $detail) }}"
-                                                onsubmit="return confirm('Do you really want to detele the detail?');"
+                                                onsubmit="return confirm('Do you really want to delete the detail?');"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
