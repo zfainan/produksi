@@ -19,7 +19,10 @@ class PelangganFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama' => fake()->name(),
+            'email' => fake()->email(),
+            'no_hp' => fake()->e164PhoneNumber(),
+            'alamat' => fake()->address(),
         ];
     }
 }

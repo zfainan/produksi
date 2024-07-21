@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @mixin \Illuminate\Database\Eloquent\Model
@@ -29,5 +30,10 @@ class DetailJadwalProduksi extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_jadwal', 'id_pesanan', 'flow_time', 'lateness', 'processing_time'];
+    protected $fillable = ['id_jadwal', 'id_pesanan', 'flow_time', 'lateness', 'processing_time', 'due_date'];
+
+    public function pesanan(): BelongsTo
+    {
+        return $this->belongsTo(Pesanan::class, 'id_pesanan', 'id_pesanan');
+    }
 }

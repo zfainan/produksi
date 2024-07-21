@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Jobs\CreateDetailJadwal;
-use App\Models\DetailJadwalProduksi;
 use App\Models\JadwalProduksi;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
@@ -48,29 +47,34 @@ class JadwalProduksiController extends Controller
             ->orderBy('tanggal_permintaan')
             ->get();
 
-        // TODO: create jadwal
-        // DB::transaction(function () use ($request, $pesanan) {
-        //     $jadwal = JadwalProduksi::create([
-        //         'tanggal_mulai' => $request->tanggal_mulai,
-        //         'tanggal_selesai' => $pesanan->last()->tanggal_permintaan,
-        //     ]);
+        DB::transaction(function () use ($request, $pesanan) {
+            $jadwal = JadwalProduksi::create([
+                'tanggal_mulai' => $request->tanggal_mulai,
+                'tanggal_selesai' => $pesanan->last()->tanggal_permintaan,
+            ]);
 
-        //     dispatch_sync(new CreateDetailJadwal($jadwal, $pesanan));
-        // });
+            dispatch_sync(new CreateDetailJadwal($jadwal, $pesanan));
+        });
+
+        return redirect()
+            ->route('jadwal.index')
+            ->with('success', 'Jadwal produksi berhasil dibuat');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(JadwalProduksi $jadwalProduksi)
+    public function show(JadwalProduksi $jadwal)
     {
-        //
+        $jadwal->load('detail.pesanan');
+
+        return view('jadwal.show', compact('jadwal'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(JadwalProduksi $jadwalProduksi)
+    public function edit(JadwalProduksi $jadwal)
     {
         //
     }
@@ -78,7 +82,7 @@ class JadwalProduksiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JadwalProduksi $jadwalProduksi)
+    public function update(Request $request, JadwalProduksi $jadwal)
     {
         //
     }
@@ -86,8 +90,12 @@ class JadwalProduksiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JadwalProduksi $jadwalProduksi)
+    public function destroy(JadwalProduksi $jadwal)
     {
-        //
+        $jadwal->delete();
+
+        return redirect()
+            ->route('jadwal.index')
+            ->with('success', 'Jadwal produksi berhasil dihapus');
     }
 }

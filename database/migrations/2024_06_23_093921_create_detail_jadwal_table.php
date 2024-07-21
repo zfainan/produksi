@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('detail_jadwal_produksi', function (Blueprint $table) {
             $table->id('id_detail');
             $table->unsignedBigInteger('id_jadwal');
-            $table->unsignedBigInteger('id_pesanan');
+            $table->unsignedBigInteger('id_pesanan')->nullable();
             $table->double('flow_time');
             $table->double('lateness');
             $table->double('processing_time');
+            $table->double('due_date');
             $table->timestamps();
 
-            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal_produksi');
-            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
+            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal_produksi')->onDelete('cascade');
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan')->onDelete('set null');
         });
     }
 

@@ -14,15 +14,20 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  *
- * @property      int                             $id_pesanan
- * @property      int                             $id_pelanggan
- * @property      string                          $tanggal_pesan
- * @property      string                          $tanggal_permintaan
- * @property      string                          $tipe_pesanan
- * @property      \Illuminate\Support\Carbon|null $created_at
- * @property      \Illuminate\Support\Carbon|null $updated_at
- * @property      int|null                        $pelanggans_count
- * @property-read \App\Models\Pelanggan|null      $pelanggan
+ * @property      int                                                                         $id_pesanan
+ * @property      int                                                                         $id_pelanggan
+ * @property      string                                                                      $tanggal_pesan
+ * @property      string                                                                      $tanggal_permintaan
+ * @property      string                                                                      $tipe_pesanan
+ * @property      \Illuminate\Support\Carbon|null                                             $created_at
+ * @property      \Illuminate\Support\Carbon|null                                             $updated_at
+ * @property      int|null                                                                    $total_processing_time
+ * @property      int|null                                                                    $pelanggans_count
+ * @property      int|null                                                                    $details_count
+ * @property      int|null                                                                    $detail_jadwals_count
+ * @property-read \App\Models\Pelanggan|null                                                  $pelanggan
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailPesanan[]        $detail
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailJadwalProduksi[] $detailJadwal
  */
 class Pesanan extends Model
 {

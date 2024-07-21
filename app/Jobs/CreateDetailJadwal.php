@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use App\Models\DetailJadwalProduksi;
@@ -19,8 +21,7 @@ class CreateDetailJadwal
     public function __construct(
         public JadwalProduksi $jadwal,
         public Collection $pesanan,
-    ) {
-    }
+    ) {}
 
     /**
      * Execute the job.
@@ -28,23 +29,26 @@ class CreateDetailJadwal
     public function handle(): void
     {
         $startDate = Carbon::create($this->jadwal->tanggal_mulai);
-        /** @var Carbon $lastItemDueDate */
-        $lastItemDueDate = Carbon::create($this->jadwal->tanggal_mulai);
+        $processingTimes = collect();
 
-        $this->pesanan->each(function (Pesanan $item) use ($startDate, $lastItemDueDate) {
-            // $itemDueDate = Carbon::create($item->tanggal_permintaan);
+        $this->pesanan->each(function (Pesanan $item) use ($startDate, $processingTimes) {
+            $itemDueDate = Carbon::create($item->tanggal_permintaan);
 
-            // $processingTime = Carbon::create($item->total_processing_time);
-            // $flowtime = $startDate->diffInDays($itemDueDate);
-            // $lateness = 1;
+            $processingTime = $item->total_processing_time ?? 0;
+            $flowtime = $processingTimes->sum() + $processingTime;
+            $dueDate = $startDate->diffInDays($itemDueDate);
+            $lateness = $flowtime - $dueDate;
 
-            // DetailJadwalProduksi::create([
-            //     'id_pesanan' => $item->id_pesanan,
-            //     'id_jadwal' => $this->jadwal->id_jadwal,
-            //     'flowtime' => $flowtime,
-            //     'lateness' => $lateness,
-            //     'processing_time' => $processingTime,
-            // ]);
+            DetailJadwalProduksi::create([
+                'id_pesanan' => $item->id_pesanan,
+                'id_jadwal' => $this->jadwal->id_jadwal,
+                'flow_time' => $flowtime,
+                'lateness' => $lateness < 0 ? 0 : $lateness,
+                'processing_time' => $processingTime,
+                'due_date' => $dueDate,
+            ]);
+
+            $processingTimes->push($item->total_processing_time ?? 0);
         });
     }
 }

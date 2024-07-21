@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static \Database\Factories\JadwalProduksiFactory<self> factory($count = null, $state = [])
@@ -32,4 +33,9 @@ class JadwalProduksi extends Model
      * @var array
      */
     protected $fillable = ['tanggal_mulai', 'tanggal_selesai'];
+
+    public function detail(): HasMany
+    {
+        return $this->hasMany(DetailJadwalProduksi::class, 'id_jadwal', 'id_jadwal');
+    }
 }

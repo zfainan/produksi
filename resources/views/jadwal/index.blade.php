@@ -46,8 +46,15 @@
                                     <td class="d-flex justify-content-center">
                                         <a class="btn btn-sm btn-outline-info me-1"
                                             href="{{ route('jadwal.show', $jadwal) }}"><i class="bi bi-eye"></i></a>
-                                        <a class="btn btn-sm btn-outline-warning me-1"
-                                            href="{{ route('jadwal.edit', $jadwal) }}"><i class="bi bi-pen"></i></a>
+
+                                        <form onsubmit="return confirm('Do you really want to delete schedule?');"
+                                            action="{{ route('jadwal.destroy', $jadwal) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-sm btn-outline-danger me-1"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

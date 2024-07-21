@@ -20,7 +20,7 @@ class DetailPesananController extends Controller
      */
     public function create(Request $request)
     {
-        if (!$request->filled('id_pesanan')) {
+        if (! $request->filled('id_pesanan')) {
             return redirect()->route('pesanan.index');
         }
 
@@ -43,7 +43,6 @@ class DetailPesananController extends Controller
             'satuan' => ['required', new Enum(SatuanEnum::class)],
         ]);
 
-
         if (DetailJadwalProduksi::where('id_pesanan', $request->id_pesanan)->count()) {
             abort(422, 'Pesanan telah masuk jadwal produksi');
         }
@@ -52,7 +51,7 @@ class DetailPesananController extends Controller
             $detail = DetailPesanan::create($validated);
 
             $detail->pesanan->update([
-                'total_processing_time' => ($detail->pesanan->total_processing_time + $request->integer('processing_time'))
+                'total_processing_time' => ($detail->pesanan->total_processing_time + $request->integer('processing_time')),
             ]);
         });
 
@@ -90,7 +89,7 @@ class DetailPesananController extends Controller
 
         DB::transaction(function () use ($pesanan, $detailPesanan) {
             $pesanan->update([
-                'total_processing_time' => ($detailPesanan->pesanan->total_processing_time - $detailPesanan->processing_time)
+                'total_processing_time' => ($detailPesanan->pesanan->total_processing_time - $detailPesanan->processing_time),
             ]);
 
             $detailPesanan->delete();
