@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex flex-wrap">
         <div class="pagetitle">
-            <h1>Pesanan</h1>
+            <h1>Pesanan Pelanggan</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -53,10 +53,11 @@
                                             href="{{ route('pesanan.edit', $item) }}"><i class="bi bi-pen"></i></a>
 
                                         <form
-                                            onsubmit="return confirm('Do you really want to delete user {{ $item->nama }}?');"
+                                            onsubmit="return confirm('Do you really want to delete order?');"
                                             action="{{ route('pesanan.destroy', $item) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
+
                                             <button type="submit" class="btn btn-sm btn-outline-danger me-1"><i
                                                     class="bi bi-trash"></i></button>
                                         </form>

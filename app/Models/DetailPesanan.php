@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static \Database\Factories\DetailPesananFactory<self> factory($count = null, $state = [])
@@ -27,4 +28,27 @@ class DetailPesanan extends Model
     protected $table = 'detail_pesanan';
 
     protected $primaryKey = 'id_detail_pesanan';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id_pesanan',
+        'id_produk',
+        'jumlah_order',
+        'satuan',
+        'processing_time',
+    ];
+
+    public function pesanan(): BelongsTo
+    {
+        return $this->belongsTo(Pesanan::class, 'id_pesanan', 'id_pesanan');
+    }
+
+    public function produk(): BelongsTo
+    {
+        return $this->belongsTo(Produk::class, 'id_produk', 'id_produk');
+    }
 }

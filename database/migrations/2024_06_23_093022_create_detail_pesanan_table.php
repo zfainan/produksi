@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('satuan', 10);
             $table->timestamps();
 
-            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan');
-            $table->foreign('id_produk')->references('id_produk')->on('produk');
+            $table->foreign('id_pesanan')->references('id_pesanan')->on('pesanan')->onDelete('cascade');
+            $table->foreign('id_produk')->references('id_produk')->on('produk')->onDelete('cascade');;
         });
     }
 

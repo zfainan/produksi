@@ -9,18 +9,26 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item">Transaksi</li>
-                <li class="breadcrumb-item"><a href="{{ route('pesanan.index') }}">Data Pesanan Pelanggan</a></li>
-                <li class="breadcrumb-item active">Detail Pesanan Pelanggan</li>
+                <li class="breadcrumb-item"><a href="{{ route('pesanan.index') }}">Pesanan Pelanggan</a></li>
+                <li class="breadcrumb-item active">{{ $pesanan->id_pesanan }}</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <section class="section">
+        @session('success')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ $value }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
         <div class="card">
             <div class="card-body">
 
                 <div class="mb-5">
-                    <h5 class="card-title">Detail Pesanan Pelanggan</h5>
+                    <h5 class="card-title">Data Pesanan Pelanggan</h5>
 
                     <div class="row">
                         <div class="col-lg-3 col-md-4 label">Pelanggan</div>
@@ -40,6 +48,60 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 label">Tipe Pesanan</div>
                         <div class="col-lg-9 col-md-8">{{ $pesanan->tipe_pesanan }}</div>
+                    </div>
+
+                    <div class="d-flex">
+                        <h5 class="card-title">Detail Pesanan</h5>
+                        <a href="{{ route('detail-pesanan.create', [
+                            'id_pesanan' => $pesanan->id_pesanan,
+                        ]) }}"
+                            class="btn btn-primary my-auto ms-auto">
+                            Tambah Detail Pesanan
+                        </a>
+                    </div>
+
+                    <div class="table-responsive rounded border p-2">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th>Jumlah</th>
+                                    <th>Perkiraan waktu produksi</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pesanan->detail as $detail)
+                                    <tr>
+                                        <td>{{ $detail->produk?->nama_produk }}</td>
+                                        <td>{{ $detail->jumlah_order }}</td>
+                                        <td>{{ $detail->processing_time }} Hari</td>
+                                        <td>
+                                            <form action="{{ route('detail-pesanan.destroy', $detail) }}"
+                                                onsubmit="return confirm('Do you really want to detele the detail?');"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                @if (!count($pesanan->detail))
+                                    <tr>
+                                        <td colspan="4" class="border-0">
+                                            <p class="text-center">
+                                                Belum ada data
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>

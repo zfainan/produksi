@@ -46,21 +46,23 @@ class PesananController extends Controller
         $pesanan->fill($request->all());
         $pesanan->save();
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan created successfully.');
+        return redirect()->route('pesanan.show', $pesanan)->with('success', 'Pesanan created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(pesanan $pesanan)
+    public function show(Pesanan $pesanan)
     {
+        $pesanan->load('detail');
+
         return view('pesanan.show', compact('pesanan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(pesanan $pesanan)
+    public function edit(Pesanan $pesanan)
     {
         $pelanggan = Pelanggan::all();
 
@@ -70,7 +72,7 @@ class PesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pesanan $pesanan)
+    public function update(Request $request, Pesanan $pesanan)
     {
         $request->validate([
             'id_pelanggan' => 'required|exists:pelanggan,id_pelanggan',
@@ -88,7 +90,7 @@ class PesananController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pesanan $pesanan)
+    public function destroy(Pesanan $pesanan)
     {
         $pesanan->delete();
 

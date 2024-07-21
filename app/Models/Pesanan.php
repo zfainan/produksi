@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static \Database\Factories\PesananFactory<self> factory($count = null, $state = [])
@@ -36,10 +37,20 @@ class Pesanan extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_pelanggan', 'tanggal_pesan', 'tanggal_permintaan', 'tipe_pesanan'];
+    protected $fillable = ['id_pelanggan', 'tanggal_pesan', 'tanggal_permintaan', 'tipe_pesanan', 'total_processing_time'];
 
     public function pelanggan(): BelongsTo
     {
         return $this->belongsTo(Pelanggan::class, 'id_pelanggan', 'id_pelanggan');
+    }
+
+    public function detail(): HasMany
+    {
+        return $this->hasMany(DetailPesanan::class, 'id_pesanan', 'id_pesanan');
+    }
+
+    public function detailJadwal(): HasMany
+    {
+        return $this->hasMany(DetailJadwalProduksi::class, 'id_pesanan', 'id_pesanan');
     }
 }
