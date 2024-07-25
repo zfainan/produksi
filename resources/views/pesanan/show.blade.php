@@ -24,6 +24,14 @@
             </div>
         @endsession
 
+        @session('error')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ $value }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
         <div class="card">
             <div class="card-body">
 
@@ -92,6 +100,53 @@
                                 @endforeach
 
                                 @if (!count($pesanan->detail))
+                                    <tr>
+                                        <td colspan="4" class="border-0">
+                                            <p class="text-center">
+                                                Belum ada data
+                                            </p>
+                                        </td>
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex">
+                        <h5 class="card-title">Pengajuan Bahan Baku</h5>
+                        <a href="{{ route('pengajuan-bahan.create', [
+                            'id_pesanan' => $pesanan->id_pesanan,
+                        ]) }}"
+                            class="btn btn-primary my-auto ms-auto">
+                            Buat Pengajuan Bahan
+                        </a>
+                    </div>
+
+                    <div class="table-responsive rounded border p-2">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Pengajuan</th>
+                                    <th>Bahan</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pesanan->pengajuanBahan as $item)
+                                    <tr>
+                                        <td><a
+                                                href="{{ route('pengajuan-bahan.show', $item) }}">{{ $item->id_pengajuan }}</a>
+                                        </td>
+                                        <td>{{ $item->bahan?->nama_bahan_baku }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+                                        <td>{{ $item->bahan?->satuan }}</td>
+                                        <td>{{ $item->approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
+                                    </tr>
+                                @endforeach
+
+                                @if (!count($pesanan->pengajuanBahan))
                                     <tr>
                                         <td colspan="4" class="border-0">
                                             <p class="text-center">

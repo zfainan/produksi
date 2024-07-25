@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -20,7 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property      \Illuminate\Support\Carbon|null                                     $created_at
  * @property      \Illuminate\Support\Carbon|null                                     $updated_at
  * @property      int|null                                                            $details_count
+ * @property      int|null                                                            $bahans_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailProduk[] $detail
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BahanBaku[]    $bahan
  */
 class Produk extends Model
 {
@@ -40,5 +43,10 @@ class Produk extends Model
     public function detail(): HasMany
     {
         return $this->hasMany(DetailProduk::class, 'id_produk', 'id_produk');
+    }
+
+    public function bahan(): BelongsToMany
+    {
+        return $this->belongsToMany(BahanBaku::class, 'detail_produk', 'id_produk', 'id_bahan');
     }
 }

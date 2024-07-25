@@ -7,6 +7,7 @@ use App\Http\Controllers\DetailPesananController;
 use App\Http\Controllers\DetailProdukController;
 use App\Http\Controllers\JadwalProduksiController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PengajuanBahanBakuController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,9 @@ Route::middleware('auth')->group(function () {
         ->only(['create', 'store', 'destroy']);
 
     Route::resource('jadwal', JadwalProduksiController::class);
+
+    Route::resource('pengajuan-bahan', PengajuanBahanBakuController::class);
+    Route::post('pengajuan-bahan/{pengajuan_bahan}/approve', [PengajuanBahanBakuController::class, 'approve'])->name('pengajuan-bahan.approve');
 });
 
 Auth::routes(['register' => false, 'reset' => false]);

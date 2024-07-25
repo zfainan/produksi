@@ -25,9 +25,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property      int|null                                                                    $pelanggans_count
  * @property      int|null                                                                    $details_count
  * @property      int|null                                                                    $detail_jadwals_count
+ * @property      int|null                                                                    $pengajuan_bahans_count
  * @property-read \App\Models\Pelanggan|null                                                  $pelanggan
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailPesanan[]        $detail
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailJadwalProduksi[] $detailJadwal
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PengajuanBahanBaku[]   $pengajuanBahan
  */
 class Pesanan extends Model
 {
@@ -57,5 +59,10 @@ class Pesanan extends Model
     public function detailJadwal(): HasMany
     {
         return $this->hasMany(DetailJadwalProduksi::class, 'id_pesanan', 'id_pesanan');
+    }
+
+    public function pengajuanBahan(): HasMany
+    {
+        return $this->hasMany(PengajuanBahanBaku::class, 'id_pesanan', 'id_pesanan');
     }
 }

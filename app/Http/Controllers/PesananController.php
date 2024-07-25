@@ -54,7 +54,7 @@ class PesananController extends Controller
      */
     public function show(Pesanan $pesanan)
     {
-        $pesanan->load('detail');
+        $pesanan->load(['detail', 'pengajuanBahan.bahan']);
 
         return view('pesanan.show', compact('pesanan'));
     }

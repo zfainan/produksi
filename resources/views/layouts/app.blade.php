@@ -70,7 +70,8 @@
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                             data-bs-toggle="dropdown">
                             <img src="/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                            <span class="d-none d-md-block dropdown-toggle ps-2">{{ explode(' ', auth()->user()->nama)[0] }}</span>
+                            <span
+                                class="d-none d-md-block dropdown-toggle ps-2">{{ explode(' ', auth()->user()->nama)[0] }}</span>
                         </a><!-- End Profile Iamge Icon -->
 
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -83,7 +84,8 @@
                             </li>
 
                             <li>
-                                <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Do you really want to logout?');">
+                                <form action="{{ route('logout') }}" method="POST"
+                                    onsubmit="return confirm('Do you really want to logout?');">
                                     @csrf
 
                                     <button class="dropdown-item d-flex align-items-center" type="submit">
@@ -157,8 +159,23 @@
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="nav-link collapsed" href="{{ route('pengajuan-bahan.index') }}">
+                                <i class="bi bi-file-text"></i>
+                                <span>Pengajuan Bahan</span>
+                            </a>
+                        </li>
                     </ul>
                 </li><!-- End Forms Nav -->
+
+                <li class="nav-heading">Pages</li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
+                        <i class="bi bi-calendar-week"></i>
+                        <span>Jadwal Produksi</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
@@ -173,22 +190,6 @@
                         </li>
                     </ul>
                 </li><!-- End Charts Nav -->
-
-                <li class="nav-heading">Pages</li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#">
-                        <i class="bi bi-file-text"></i>
-                        <span>Pengajuan Bahan</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
-                        <i class="bi bi-calendar-week"></i>
-                        <span>Jadwal Produksi</span>
-                    </a>
-                </li>
             </ul>
 
         </aside><!-- End Sidebar-->
