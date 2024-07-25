@@ -30,17 +30,17 @@
                 <div class="mb-5">
                     <h5 class="card-title">Detail Produk</h5>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Nama</div>
                         <div class="col-lg-9 col-md-8">{{ $produk->nama_produk }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Kemasan</div>
                         <div class="col-lg-9 col-md-8">{{ Str::title($produk->kemasan) }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Harga</div>
                         <div class="col-lg-9 col-md-8">Rp {{ $produk->harga }}</div>
                     </div>

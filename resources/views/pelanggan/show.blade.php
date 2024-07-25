@@ -22,22 +22,22 @@
                 <div class="mb-5">
                     <h5 class="card-title">Detail Pelanggan</h5>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Nama</div>
                         <div class="col-lg-9 col-md-8">{{ $pelanggan->nama }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">No. Telp</div>
                         <div class="col-lg-9 col-md-8">{{ $pelanggan->no_hp }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Email</div>
                         <div class="col-lg-9 col-md-8">{{ $pelanggan->email }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Alamat</div>
                         <div class="col-lg-9 col-md-8">{{ $pelanggan->alamat }}</div>
                     </div>

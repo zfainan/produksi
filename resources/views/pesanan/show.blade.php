@@ -38,22 +38,22 @@
                 <div class="mb-5">
                     <h5 class="card-title">Data Pesanan Pelanggan</h5>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Pelanggan</div>
                         <div class="col-lg-9 col-md-8">{{ $pesanan->pelanggan->nama }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Tanggal Pesan</div>
                         <div class="col-lg-9 col-md-8">{{ $pesanan->tanggal_pesan }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Tanggal Permintaan</div>
                         <div class="col-lg-9 col-md-8">{{ $pesanan->tanggal_permintaan }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Tipe Pesanan</div>
                         <div class="col-lg-9 col-md-8">{{ $pesanan->tipe_pesanan }}</div>
                     </div>

@@ -29,12 +29,12 @@
                 <div class="mb-5">
                     <h5 class="card-title">Data Jadwal Produksi</h5>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Tanggal Mulai</div>
                         <div class="col-lg-9 col-md-8">{{ $jadwal->tanggal_mulai }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Tanggal Selesai</div>
                         <div class="col-lg-9 col-md-8">{{ $jadwal->tanggal_selesai }}</div>
                     </div>

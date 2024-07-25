@@ -22,17 +22,17 @@
                 <div class="mb-5">
                     <h5 class="card-title">Detail Bahan Baku</h5>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Nama</div>
                         <div class="col-lg-9 col-md-8">{{ $bahanBaku->nama_bahan_baku }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Satuan</div>
                         <div class="col-lg-9 col-md-8">{{ $bahanBaku->satuan }}</div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-lg-3 col-md-4 label">Stok</div>
                         <div class="col-lg-9 col-md-8">{{ $bahanBaku->stok }} {{ $bahanBaku->satuan }}</div>
                     </div>
