@@ -20,7 +20,7 @@ class DetailPesananController extends Controller
      */
     public function create(Request $request)
     {
-        if (! $request->filled('id_pesanan')) {
+        if (!$request->filled('id_pesanan')) {
             return redirect()->route('pesanan.index');
         }
 
@@ -44,7 +44,9 @@ class DetailPesananController extends Controller
         ]);
 
         if (DetailJadwalProduksi::where('id_pesanan', $request->id_pesanan)->count()) {
-            abort(422, 'Pesanan telah masuk jadwal produksi');
+            return redirect()
+                ->route('pesanan.show', $request->id_pesanan)
+                ->with('error', 'Pesanan telah masuk jadwal produksi');
         }
 
         DB::transaction(function () use ($validated, $request) {
@@ -66,7 +68,9 @@ class DetailPesananController extends Controller
     public function destroy(DetailPesanan $detailPesanan)
     {
         if (count($detailPesanan->pesanan->detailJadwal)) {
-            abort(422, 'Pesanan telah masuk jadwal produksi');
+            return redirect()
+                ->route('pesanan.show', $detailPesanan->id_pesanan)
+                ->with('error', 'Pesanan telah masuk jadwal produksi');
         }
 
         $pesanan = $detailPesanan->pesanan;

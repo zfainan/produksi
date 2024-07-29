@@ -28,7 +28,7 @@ class PengajuanBahanBakuController extends Controller
      */
     public function create(Request $request)
     {
-        if (! $request->filled('id_pesanan')) {
+        if (!$request->filled('id_pesanan')) {
             return redirect()->route('pesanan.index');
         }
 
@@ -116,7 +116,9 @@ class PengajuanBahanBakuController extends Controller
     public function destroy(PengajuanBahanBaku $pengajuanBahan)
     {
         if ($pengajuanBahan->approved) {
-            abort(422, 'Pengajuan bahan telah disetujui.');
+            return redirect()
+                ->route('pesanan.show', $pengajuanBahan->id_pesanan)
+                ->with('error', 'Pengajuan bahan telah disetujui.');
         }
 
         $pengajuanBahan->delete();
@@ -127,7 +129,15 @@ class PengajuanBahanBakuController extends Controller
     public function approve(PengajuanBahanBaku $pengajuanBahan)
     {
         if ($pengajuanBahan->approved) {
-            abort(422, 'Pengajuan bahan telah disetujui.');
+            return redirect()
+                ->route('pesanan.show', $pengajuanBahan->id_pesanan)
+                ->with('error', 'Pengajuan bahan telah disetujui.');
+        }
+
+        if ($pengajuanBahan->bahan->stok < $pengajuanBahan->jumlah) {
+            return redirect()
+                ->route('pengajuan-bahan.show', $pengajuanBahan->id_pengajuan)
+                ->with('error', sprintf('Stok bahan %s kurang dari %s.', $pengajuanBahan->bahan->nama_bahan_baku, $pengajuanBahan->jumlah));
         }
 
         $pengajuanBahan->approved = true;
@@ -136,7 +146,7 @@ class PengajuanBahanBakuController extends Controller
             $pengajuanBahan->save();
 
             $pengajuanBahan->bahan->update([
-                'stok' => $pengajuanBahan->bahan->stok + $pengajuanBahan->jumlah,
+                'stok' => $pengajuanBahan->bahan->stok - $pengajuanBahan->jumlah,
             ]);
         });
 

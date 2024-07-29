@@ -15,7 +15,6 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-
         @session('success')
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="bi bi-check-circle me-1"></i>
@@ -25,8 +24,7 @@
         @endsession
 
         @session('error')
-            <div class="alert alert-error alert-dismissible fade show" role="alert">
-                <i class="bi bi-check-circle me-1"></i>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ $value }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

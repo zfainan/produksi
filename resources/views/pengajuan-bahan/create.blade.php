@@ -16,6 +16,21 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+        @session('success')
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle me-1"></i>
+                {{ $value }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
+        @session('error')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ $value }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endsession
+
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Buat Pengajuan Bahan Baku</h5>
@@ -34,7 +49,7 @@
 
                                 @foreach ($bahan as $item)
                                     <option value="{{ $item->id_bahan }}" @selected($item->id_bahan == old('id_bahan'))>
-                                        {{ $item->nama_bahan_baku }} - {{ $item->satuan }}
+                                        {{ $item->nama_bahan_baku }} - {{ $item->stok }} {{ $item->satuan }}
                                     </option>
                                 @endforeach
                             </select>
