@@ -21,26 +21,32 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
-    Route::resource('users', UserController::class);
+    // master data
+    Route::prefix('master-data')->group(function () {
+        Route::resource('users', UserController::class);
 
-    Route::resource('produk', ProdukController::class);
+        Route::resource('produk', ProdukController::class);
 
-    Route::resource('detail-produk', DetailProdukController::class)
-        ->only(['create', 'store', 'destroy']);
+        Route::resource('detail-produk', DetailProdukController::class)
+            ->only(['create', 'store', 'destroy']);
 
-    Route::resource('bahan-baku', BahanBakuController::class);
+        Route::resource('bahan-baku', BahanBakuController::class);
 
-    Route::resource('pelanggan', PelangganController::class);
+        Route::resource('pelanggan', PelangganController::class);
+    });
 
-    Route::resource('pesanan', PesananController::class);
+    // transaksi
+    Route::prefix('transaksi')->group(function () {
+        Route::resource('pesanan', PesananController::class);
 
-    Route::resource('detail-pesanan', DetailPesananController::class)
-        ->only(['create', 'store', 'destroy']);
+        Route::resource('detail-pesanan', DetailPesananController::class)
+            ->only(['create', 'store', 'destroy']);
+
+        Route::resource('pengajuan-bahan', PengajuanBahanBakuController::class);
+        Route::post('pengajuan-bahan/{pengajuan_bahan}/approve', [PengajuanBahanBakuController::class, 'approve'])->name('pengajuan-bahan.approve');
+    });
 
     Route::resource('jadwal', JadwalProduksiController::class);
-
-    Route::resource('pengajuan-bahan', PengajuanBahanBakuController::class);
-    Route::post('pengajuan-bahan/{pengajuan_bahan}/approve', [PengajuanBahanBakuController::class, 'approve'])->name('pengajuan-bahan.approve');
 });
 
 Auth::routes(['register' => false, 'reset' => false]);

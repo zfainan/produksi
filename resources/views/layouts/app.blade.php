@@ -113,32 +113,40 @@
                     </a>
                 </li>
 
-                <li class="nav-heading">Administrator</li>
+                <li class="nav-heading">
+                    Administrator
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
-                        href="#">
+                    <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapsed' }}"
+                        data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <ul id="components-nav"
+                        class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapse' }}"
+                        data-bs-parent="#sidebar-nav">
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('users.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'users' ? '' : 'collapsed' }}"
+                                href="{{ route('users.index') }}">
                                 <i class="bi bi-circle"></i><span>Pengguna</span>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('produk.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'produk' ? '' : 'collapsed' }}"
+                                href="{{ route('produk.index') }}">
                                 <i class="bi bi-circle"></i><span>Produk</span>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('bahan-baku.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'bahan-baku' ? '' : 'collapsed' }}"
+                                href="{{ route('bahan-baku.index') }}">
                                 <i class="bi bi-circle"></i><span>Bahan Baku</span>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('pelanggan.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pelanggan' ? '' : 'collapsed' }}"
+                                href="{{ route('pelanggan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pelanggan</span>
                             </a>
                         </li>
@@ -146,19 +154,23 @@
                 </li><!-- End Components Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse"
-                        href="#">
+                    <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan']) ? '' : 'collapsed' }}"
+                        data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-journal-text"></i><span>Transaksi</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <ul id="forms-nav"
+                        class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan']) ? '' : 'collapse' }}"
+                        data-bs-parent="#sidebar-nav">
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('pesanan.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pesanan' ? '' : 'collapsed' }}"
+                                href="{{ route('pesanan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link collapsed" href="{{ route('pengajuan-bahan.index') }}">
+                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pengajuan-bahan' ? '' : 'collapsed' }}"
+                                href="{{ route('pengajuan-bahan.index') }}">
                                 <i class="bi bi-file-text"></i>
                                 <span>Pengajuan Bahan</span>
                             </a>
