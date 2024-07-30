@@ -99,20 +99,6 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label for="processing_time" class="col-sm-3 col-form-label">Perkiraan Waktu Produksi (Hari)</label>
-                        <div class="col-sm-9">
-                            <input type="number" name="processing_time" value="{{ old('processing_time') }}"
-                                class="form-control @error('processing_time') is-invalid @enderror">
-
-                            @error('processing_time')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <div class="col-sm-9 ms-auto">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

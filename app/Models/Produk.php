@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property      int                                                                 $harga
  * @property      \Illuminate\Support\Carbon|null                                     $created_at
  * @property      \Illuminate\Support\Carbon|null                                     $updated_at
+ * @property      int|null                                                            $production_per_day
  * @property      int|null                                                            $details_count
  * @property      int|null                                                            $bahans_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\DetailProduk[] $detail
@@ -38,7 +39,7 @@ class Produk extends Model
      *
      * @var array
      */
-    protected $fillable = ['nama_produk', 'kemasan', 'harga'];
+    protected $fillable = ['nama_produk', 'kemasan', 'harga', 'production_per_day'];
 
     public function detail(): HasMany
     {

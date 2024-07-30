@@ -45,6 +45,12 @@
                         <div class="col-lg-9 col-md-8">Rp {{ $produk->harga }}</div>
                     </div>
 
+                    <div class="row mb-2">
+                        <div class="col-lg-3 col-md-4 label">Kapasitas Produksi</div>
+                        <div class="col-lg-9 col-md-8">{{ $produk->production_per_day }} {{ Str::title($produk->kemasan) }}
+                            Per Hari</div>
+                    </div>
+
                     <div class="d-flex">
                         <h5 class="card-title">Detail Bahan Baku</h5>
                         <a href="{{ route('detail-produk.create', [

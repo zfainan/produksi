@@ -28,7 +28,7 @@ class PengajuanBahanBakuController extends Controller
      */
     public function create(Request $request)
     {
-        if (!$request->filled('id_pesanan')) {
+        if (! $request->filled('id_pesanan')) {
             return redirect()->route('pesanan.index');
         }
 

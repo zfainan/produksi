@@ -35,6 +35,7 @@
                                 <th>Nama</th>
                                 <th>Kemasan</th>
                                 <th>Harga</th>
+                                <th>Kapasitas Produksi</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -44,6 +45,7 @@
                                     <td>{{ $item->nama_produk }}</td>
                                     <td>{{ Str::title($item->kemasan) }}</td>
                                     <td>Rp {{ $item->harga }}</td>
+                                    <td>{{ $item->production_per_day }} {{ Str::title($item->kemasan) }} per hari</td>
                                     <td class="d-flex justify-content-center">
                                         <a class="btn btn-sm btn-outline-info me-1"
                                             href="{{ route('produk.show', $item) }}"><i class="bi bi-eye"></i></a>

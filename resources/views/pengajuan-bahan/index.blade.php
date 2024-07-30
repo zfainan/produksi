@@ -40,6 +40,7 @@
                                 <th>ID Pesanan</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,6 +52,8 @@
                                     </td>
                                     <td>{{ $item->tanggal_pengajuan }}</td>
                                     <td>{{ $item->approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
+                                    <td><a href="{{ route('pengajuan-bahan.show', $item) }}">
+                                            <i class="bi bi-eye"></i></a></td>
                                 </tr>
                             @endforeach
 

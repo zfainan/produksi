@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property      string                                                                      $tipe_pesanan
  * @property      \Illuminate\Support\Carbon|null                                             $created_at
  * @property      \Illuminate\Support\Carbon|null                                             $updated_at
- * @property      int|null                                                                    $total_processing_time
+ * @property      float|null                                                                  $total_processing_time
  * @property      int|null                                                                    $pelanggans_count
  * @property      int|null                                                                    $details_count
  * @property      int|null                                                                    $detail_jadwals_count

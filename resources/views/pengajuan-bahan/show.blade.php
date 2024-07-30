@@ -39,7 +39,7 @@
 
                         @if (!$pengajuanBahan->approved)
                             <div class="dropdown my-auto ms-auto">
-                                <button class="btn btn-light" type="button" data-bs-toggle="dropdown"
+                                <button class="btn btn-light border border-dark" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </button>

@@ -73,6 +73,20 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label for="production_per_day" class="col-sm-2 col-form-label">Kapasitas Produksi Per Hari</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="production_per_day" value="{{ old('production_per_day') }}"
+                                class="form-control @error('production_per_day') is-invalid @enderror">
+
+                            @error('production_per_day')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
                         <div class="col-sm-10 ms-auto">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>

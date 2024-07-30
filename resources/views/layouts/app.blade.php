@@ -154,16 +154,16 @@
                 </li><!-- End Components Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan']) ? '' : 'collapsed' }}"
+                    <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan', 'detail-pesanan']) ? '' : 'collapsed' }}"
                         data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-journal-text"></i><span>Transaksi</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="forms-nav"
-                        class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan']) ? '' : 'collapse' }}"
+                        class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan', 'detail-pesanan']) ? '' : 'collapse' }}"
                         data-bs-parent="#sidebar-nav">
                         <li>
-                            <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pesanan' ? '' : 'collapsed' }}"
+                            <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'detail-pesanan']) == 'pesanan' ? '' : 'collapsed' }}"
                                 href="{{ route('pesanan.index') }}">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
                             </a>

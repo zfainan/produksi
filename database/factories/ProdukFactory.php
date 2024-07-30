@@ -23,6 +23,7 @@ class ProdukFactory extends Factory
             'nama_produk' => fake()->colorName(),
             'kemasan' => KemasanEnum::getCollection()->random(),
             'harga' => fake()->numberBetween(5000, 20000),
+            'production_per_day' => fake()->numberBetween(50, 2000),
         ];
     }
 }

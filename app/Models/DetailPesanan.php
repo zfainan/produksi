@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property      string                          $satuan
  * @property      \Illuminate\Support\Carbon|null $created_at
  * @property      \Illuminate\Support\Carbon|null $updated_at
- * @property      int                             $processing_time
+ * @property      float                           $processing_time
  * @property      int|null                        $pesanans_count
  * @property      int|null                        $produks_count
  * @property-read \App\Models\Pesanan|null        $pesanan

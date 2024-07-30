@@ -130,6 +130,7 @@
                                     <th>Jumlah</th>
                                     <th>Satuan</th>
                                     <th>Status</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,6 +143,8 @@
                                         <td>{{ $item->jumlah }}</td>
                                         <td>{{ $item->bahan?->satuan }}</td>
                                         <td>{{ $item->approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
+                                        <td><a href="{{ route('pengajuan-bahan.show', $item) }}">
+                                                <i class="bi bi-eye"></i></a></td>
                                     </tr>
                                 @endforeach
 

@@ -37,7 +37,8 @@ class ProdukController extends Controller
         $request->validate([
             'nama_produk' => 'required|max:100',
             'kemasan' => ['required', new Enum(KemasanEnum::class)],
-            'harga' => 'required|integer',
+            'harga' => 'required|integer|min:0',
+            'production_per_day' => 'required|integer|min:0',
         ]);
 
         $produk = new Produk();
@@ -74,6 +75,7 @@ class ProdukController extends Controller
             'nama_produk' => 'required|max:100',
             'kemasan' => 'required|max:50',
             'harga' => 'required|integer',
+            'production_per_day' => 'required|integer|min:0',
         ]);
 
         $produk->fill($request->all());

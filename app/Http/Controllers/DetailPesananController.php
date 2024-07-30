@@ -20,7 +20,7 @@ class DetailPesananController extends Controller
      */
     public function create(Request $request)
     {
-        if (!$request->filled('id_pesanan')) {
+        if (! $request->filled('id_pesanan')) {
             return redirect()->route('pesanan.index');
         }
 
@@ -39,7 +39,6 @@ class DetailPesananController extends Controller
             'id_pesanan' => 'required|exists:pesanan,id_pesanan',
             'id_produk' => 'required|exists:produk,id_produk',
             'jumlah_order' => 'required|integer|min:0',
-            'processing_time' => 'required|integer|min:0',
             'satuan' => ['required', new Enum(SatuanEnum::class)],
         ]);
 
@@ -49,11 +48,18 @@ class DetailPesananController extends Controller
                 ->with('error', 'Pesanan telah masuk jadwal produksi');
         }
 
-        DB::transaction(function () use ($validated, $request) {
-            $detail = DetailPesanan::create($validated);
+        /** @var Produk $produk */
+        $produk = Produk::find($request->id_produk);
+        $processingTime = $request->jumlah_order / $produk->production_per_day;
+
+        DB::transaction(function () use ($validated, $processingTime) {
+            $detail = new DetailPesanan($validated);
+            $detail->processing_time = $processingTime;
+            $detail->save();
+            $detail->refresh();
 
             $detail->pesanan->update([
-                'total_processing_time' => ($detail->pesanan->total_processing_time + $request->integer('processing_time')),
+                'total_processing_time' => ($detail->pesanan->total_processing_time + $processingTime),
             ]);
         });
 
