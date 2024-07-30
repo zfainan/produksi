@@ -178,7 +178,7 @@
                     </ul>
                 </li><!-- End Forms Nav -->
 
-                <li class="nav-heading">Pages</li>
+                <li class="nav-heading">Sistem</li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
@@ -188,14 +188,27 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse"
-                        href="#">
+                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapsed' }}"
+                        data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-bar-chart"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <ul id="charts-nav" class="nav-content {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapse show' }}" data-bs-parent="#sidebar-nav">
                         <li>
-                            <a class="nav-link collapsed" href="#">
+                            <a class="nav-link {{ request()->route()->getName() == 'reports.pesanan.create' ? '' : 'collapsed' }}"
+                                href="{{ route('reports.pesanan.create') }}">
                                 <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link {{ request()->route()->getName() == 'reports.jadwal.create' ? '' : 'collapsed' }}"
+                                href="{{ route('reports.jadwal.create') }}">
+                                <i class="bi bi-circle"></i><span>Jadwal Produksi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link {{ request()->route()->getName() == 'reports.consumption.create' ? '' : 'collapsed' }}"
+                                href="{{ route('reports.consumption.create') }}">
+                                <i class="bi bi-circle"></i><span>Konsumsi Bahan Baku</span>
                             </a>
                         </li>
                     </ul>

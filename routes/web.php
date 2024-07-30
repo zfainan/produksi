@@ -10,6 +10,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PengajuanBahanBakuController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,21 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('jadwal', JadwalProduksiController::class);
+
+    // laporan
+    Route::prefix('reports')->as('reports.')->group(function () {
+        // pesanan
+        Route::get('pesanan', [ReportController::class, 'createPesanan'])->name('pesanan.create');
+        Route::post('pesanan', [ReportController::class, 'generatePesanan'])->name('pesanan');
+
+        // jadwal produksi
+        Route::get('jadwal', [ReportController::class, 'createJadwal'])->name('jadwal.create');
+        Route::post('jadwal', [ReportController::class, 'generateJadwal'])->name('jadwal');
+
+        // penggunaan bahan baku
+        Route::get('consumption', [ReportController::class, 'createConsumption'])->name('consumption.create');
+        Route::post('consumption', [ReportController::class, 'generateConsumption'])->name('consumption');
+    });
 });
 
 Auth::routes(['register' => false, 'reset' => false]);
