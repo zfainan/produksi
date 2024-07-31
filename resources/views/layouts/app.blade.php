@@ -182,8 +182,15 @@
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
-                        <i class="bi bi-calendar-week"></i>
+                        <i class="bi bi-calendar"></i>
                         <span>Jadwal Produksi</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('produksi.agenda') }}">
+                        <i class="bi bi-calendar-week"></i>
+                        <span>Agenda Produksi</span>
                     </a>
                 </li>
 
@@ -192,7 +199,7 @@
                         data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-bar-chart"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                    <ul id="charts-nav" class="nav-content {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapse show' }}" data-bs-parent="#sidebar-nav">
+                    <ul id="charts-nav" class="nav-content {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapse' }}" data-bs-parent="#sidebar-nav">
                         <li>
                             <a class="nav-link {{ request()->route()->getName() == 'reports.pesanan.create' ? '' : 'collapsed' }}"
                                 href="{{ route('reports.pesanan.create') }}">

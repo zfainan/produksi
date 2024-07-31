@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\AgendaProduksiController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\DetailPesananController;
 use App\Http\Controllers\DetailProdukController;
@@ -47,7 +48,12 @@ Route::middleware('auth')->group(function () {
         Route::post('pengajuan-bahan/{pengajuan_bahan}/approve', [PengajuanBahanBakuController::class, 'approve'])->name('pengajuan-bahan.approve');
     });
 
-    Route::resource('jadwal', JadwalProduksiController::class);
+    // produksi
+    Route::prefix('produksi')->group(function () {
+        Route::resource('jadwal', JadwalProduksiController::class);
+
+        Route::get('agenda-produksi', AgendaProduksiController::class)->name('produksi.agenda');
+    });
 
     // laporan
     Route::prefix('reports')->as('reports.')->group(function () {
