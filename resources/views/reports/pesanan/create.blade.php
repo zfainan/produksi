@@ -23,7 +23,7 @@
                     <div class="row mb-3">
                         <label for="since" class="col-sm-2 col-form-label">Sejak</label>
                         <div class="col-sm-10">
-                            <input type="datetime-local" name="since" value="{{ old('since') }}"
+                            <input type="datetime-local" name="since" value="{{ old('since') ?? now()->subDays(7)->format('Y-m-d H:m') }}"
                                 class="form-control @error('since') is-invalid @enderror">
 
                             @error('since')
@@ -37,7 +37,7 @@
                     <div class="row mb-3">
                         <label for="until" class="col-sm-2 col-form-label">Hingga</label>
                         <div class="col-sm-10">
-                            <input type="datetime-local" name="until" value="{{ old('until') }}"
+                            <input type="datetime-local" name="until" value="{{ old('until') ?? now()->format('Y-m-d H:m') }}"
                                 class="form-control @error('until') is-invalid @enderror">
 
                             @error('until')

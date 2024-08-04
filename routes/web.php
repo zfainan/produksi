@@ -66,8 +66,8 @@ Route::middleware('auth')->group(function () {
         Route::post('jadwal', [ReportController::class, 'generateJadwal'])->name('jadwal');
 
         // penggunaan bahan baku
-        Route::get('consumption', [ReportController::class, 'createConsumption'])->name('consumption.create');
-        Route::post('consumption', [ReportController::class, 'generateConsumption'])->name('consumption');
+        Route::get('pengajuan-bahan', [ReportController::class, 'createPengajuanBahan'])->name('pengajuan-bahan.create');
+        Route::post('pengajuan-bahan', [ReportController::class, 'generatePengajuanBahan'])->name('pengajuan-bahan');
     });
 });
 

@@ -213,9 +213,9 @@
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link {{ request()->route()->getName() == 'reports.consumption.create' ? '' : 'collapsed' }}"
-                                href="{{ route('reports.consumption.create') }}">
-                                <i class="bi bi-circle"></i><span>Konsumsi Bahan Baku</span>
+                            <a class="nav-link {{ request()->route()->getName() == 'reports.pengajuan-bahan.create' ? '' : 'collapsed' }}"
+                                href="{{ route('reports.pengajuan-bahan.create') }}">
+                                <i class="bi bi-circle"></i><span>Pengajuan Bahan Baku</span>
                             </a>
                         </li>
                     </ul>

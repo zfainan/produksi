@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalProduksi;
+use App\Models\PengajuanBahanBaku;
+use App\Models\Pesanan;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
 class ReportController extends Controller
 {
     public function createPesanan()
@@ -16,23 +23,68 @@ class ReportController extends Controller
         return view('reports.jadwal.create');
     }
 
-    public function createConsumption()
+    public function createPengajuanBahan()
     {
-        return view('reports.consumption.create');
+        return view('reports.pengajuan-bahan.create');
     }
 
-    public function generatePesanan()
+    public function generatePesanan(Request $request)
     {
-        return 'Soon..';
+        $request->validate([
+            'since' => 'required|date',
+            'until' => 'required|date',
+        ]);
+
+        $since = Carbon::create($request->since);
+        $until = Carbon::create($request->until);
+
+        $data = Pesanan::with(['pelanggan', 'detail.produk'])
+            ->whereBetween('tanggal_permintaan', [
+                $since, $until,
+            ])->get();
+
+        $pdf = Pdf::loadView('reports.pesanan.pdf', compact('data', 'since', 'until'));
+
+        return $pdf->download('pesanan.pdf');
     }
 
-    public function generateJadwal()
+    public function generateJadwal(Request $request)
     {
-        return 'Soon..';
+        $request->validate([
+            'since' => 'required|date',
+            'until' => 'required|date',
+        ]);
+
+        $since = Carbon::create($request->since);
+        $until = Carbon::create($request->until);
+
+        $data = JadwalProduksi::with(['detail.pesanan.detail.produk'])
+            ->whereBetween('tanggal_mulai', [
+                $since, $until,
+            ])->get();
+
+        $pdf = Pdf::loadView('reports.jadwal.pdf', compact('data', 'since', 'until'));
+
+        return $pdf->download('jadwal.pdf');
     }
 
-    public function generateConsumption()
+    public function generatePengajuanBahan(Request $request)
     {
-        return 'Soon..';
+        $request->validate([
+            'since' => 'required|date',
+            'until' => 'required|date',
+        ]);
+
+        $since = Carbon::create($request->since);
+        $until = Carbon::create($request->until);
+
+        $data = PengajuanBahanBaku::with(['bahan'])
+            ->whereBetween('created_at', [
+                $since, $until,
+            ])->get();
+
+        $pdf = Pdf::loadView('reports.pengajuan-bahan.pdf', compact('data', 'since', 'until'));
+
+        return $pdf->download('pengajuan-bahan.pdf');
     }
 }

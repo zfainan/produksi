@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Laporan Konsumsi Bahan Baku</h1>
+        <h1>Laporan Pengajuan Bahan Baku</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                 <li class="breadcrumb-item">Laporan</li>
-                <li class="breadcrumb-item active">Laporan Konsumsi Bahan Baku</li>
+                <li class="breadcrumb-item active">Laporan Pengajuan Bahan Baku</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -15,9 +15,9 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Generate Laporan Konsumsi Bahan Baku</h5>
+                <h5 class="card-title">Generate Laporan Pengajuan Bahan Baku</h5>
 
-                <form action="{{ route('reports.jadwal') }}" method="POST">
+                <form action="{{ route('reports.pengajuan-bahan') }}" method="POST">
                     @csrf
 
                     <div class="row mb-3">
