@@ -117,63 +117,45 @@
                     Administrator
                 </li> --}}
 
-                @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
-                    <li class="nav-item">
-                        <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapsed' }}"
-                            data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i
-                                class="bi bi-chevron-down ms-auto"></i>
-                        </a>
-                        <ul id="components-nav"
-                            class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapse' }}"
-                            data-bs-parent="#sidebar-nav">
-                            <li>
-                                <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'users' ? '' : 'collapsed' }}"
-                                    href="{{ route('users.index') }}">
-                                    <i class="bi bi-circle"></i><span>Pengguna</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'produk' ? '' : 'collapsed' }}"
-                                    href="{{ route('produk.index') }}">
-                                    <i class="bi bi-circle"></i><span>Produk</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pelanggan' ? '' : 'collapsed' }}"
-                                    href="{{ route('pelanggan.index') }}">
-                                    <i class="bi bi-circle"></i><span>Pelanggan</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'bahan-baku' ? '' : 'collapsed' }}"
-                                    href="{{ route('bahan-baku.index') }}">
-                                    <i class="bi bi-circle"></i><span>Bahan Baku</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li><!-- End Components Nav -->
-                @elseif (hasRole(App\Enums\JabatanEnum::WarehouseHead->value))
-                    <li class="nav-item">
-                        <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['bahan-baku']) ? '' : 'collapsed' }}"
-                            data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                            <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i
-                                class="bi bi-chevron-down ms-auto"></i>
-                        </a>
-                        <ul id="components-nav"
-                            class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['bahan-baku']) ? '' : 'collapse' }}"
-                            data-bs-parent="#sidebar-nav">
-                            <li>
-                                <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'bahan-baku' ? '' : 'collapsed' }}"
-                                    href="{{ route('bahan-baku.index') }}">
-                                    <i class="bi bi-circle"></i><span>Bahan Baku</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li><!-- End Components Nav -->
-                @endif
+                @if (!hasRole(App\Enums\JabatanEnum::WarehouseHead->value))
+                    @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+                        <li class="nav-item">
+                            <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapsed' }}"
+                                data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                                <i class="bi bi-menu-button-wide"></i><span>Master Data</span><i
+                                    class="bi bi-chevron-down ms-auto"></i>
+                            </a>
+                            <ul id="components-nav"
+                                class="nav-content {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['users', 'produk', 'detail-produk', 'bahan-baku', 'pelanggan']) ? '' : 'collapse' }}"
+                                data-bs-parent="#sidebar-nav">
+                                <li>
+                                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'users' ? '' : 'collapsed' }}"
+                                        href="{{ route('users.index') }}">
+                                        <i class="bi bi-circle"></i><span>Pengguna</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'produk' ? '' : 'collapsed' }}"
+                                        href="{{ route('produk.index') }}">
+                                        <i class="bi bi-circle"></i><span>Produk</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'pelanggan' ? '' : 'collapsed' }}"
+                                        href="{{ route('pelanggan.index') }}">
+                                        <i class="bi bi-circle"></i><span>Pelanggan</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'bahan-baku' ? '' : 'collapsed' }}"
+                                        href="{{ route('bahan-baku.index') }}">
+                                        <i class="bi bi-circle"></i><span>Bahan Baku</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li><!-- End Components Nav -->
+                    @endif
 
-                @if (hasRole(App\Enums\JabatanEnum::Administrator->value) || hasRole(App\Enums\JabatanEnum::ProductionManager->value))
                     <li class="nav-item">
                         <a class="nav-link {{ in_array(explode('.', request()->route()->getName() ?? '.')[0], ['pesanan', 'pengajuan-bahan', 'detail-pesanan']) ? '' : 'collapsed' }}"
                             data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
@@ -202,58 +184,70 @@
                             @endif
                         </ul>
                     </li><!-- End Forms Nav -->
-                @endif
 
-                @if (hasRole(App\Enums\JabatanEnum::ProductionManager->value))
+                    @if (hasRole(App\Enums\JabatanEnum::ProductionManager->value))
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
+                                <i class="bi bi-calendar"></i>
+                                <span>Jadwal Produksi</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="{{ route('produksi.agenda') }}">
+                                <i class="bi bi-calendar-week"></i>
+                                <span>Agenda Produksi</span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="{{ route('jadwal.index') }}">
-                            <i class="bi bi-calendar"></i>
-                            <span>Jadwal Produksi</span>
+                        <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapsed' }}"
+                            data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                            <i class="bi bi-bar-chart"></i><span>Laporan</span><i
+                                class="bi bi-chevron-down ms-auto"></i>
+                        </a>
+                        <ul id="charts-nav"
+                            class="nav-content {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapse' }}"
+                            data-bs-parent="#sidebar-nav">
+                            @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+                                <li>
+                                    <a class="nav-link {{ request()->route()->getName() == 'reports.pesanan.create' ? '' : 'collapsed' }}"
+                                        href="{{ route('reports.pesanan.create') }}">
+                                        <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (hasRole(App\Enums\JabatanEnum::ProductionManager->value))
+                                <li>
+                                    <a class="nav-link {{ request()->route()->getName() == 'reports.jadwal.create' ? '' : 'collapsed' }}"
+                                        href="{{ route('reports.jadwal.create') }}">
+                                        <i class="bi bi-circle"></i><span>Jadwal Produksi</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li><!-- End Charts Nav -->
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="{{ route('bahan-baku.index') }}">
+                            <i class="bi bi-circle"></i>
+                            <span>Data Bahan Baku</span>
                         </a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link collapsed" href="{{ route('produksi.agenda') }}">
-                            <i class="bi bi-calendar-week"></i>
-                            <span>Agenda Produksi</span>
+                        <a class="nav-link collapsed" href="{{ route('pengajuan-bahan.index') }}">
+                            <i class="bi bi-circle"></i>
+                            <span>Pengajuan Bahan Baku</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="{{ route('reports.pengajuan-bahan.create') }}">
+                            <i class="bi bi-circle"></i>
+                            <span>Laporan Pengajuan Bahan Baku</span>
                         </a>
                     </li>
                 @endif
-
-                <li class="nav-item">
-                    <a class="nav-link {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapsed' }}"
-                        data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-bar-chart"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="charts-nav"
-                        class="nav-content {{ explode('.', request()->route()->getName() ?? '.')[0] == 'reports' ? '' : 'collapse' }}"
-                        data-bs-parent="#sidebar-nav">
-                        @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
-                            <li>
-                                <a class="nav-link {{ request()->route()->getName() == 'reports.pesanan.create' ? '' : 'collapsed' }}"
-                                    href="{{ route('reports.pesanan.create') }}">
-                                    <i class="bi bi-circle"></i><span>Pesanan Pelanggan</span>
-                                </a>
-                            </li>
-                        @endif
-                        @if (hasRole(App\Enums\JabatanEnum::ProductionManager->value))
-                            <li>
-                                <a class="nav-link {{ request()->route()->getName() == 'reports.jadwal.create' ? '' : 'collapsed' }}"
-                                    href="{{ route('reports.jadwal.create') }}">
-                                    <i class="bi bi-circle"></i><span>Jadwal Produksi</span>
-                                </a>
-                            </li>
-                        @endif
-                        @if (hasRole(App\Enums\JabatanEnum::WarehouseHead->value))
-                            <li>
-                                <a class="nav-link {{ request()->route()->getName() == 'reports.pengajuan-bahan.create' ? '' : 'collapsed' }}"
-                                    href="{{ route('reports.pengajuan-bahan.create') }}">
-                                    <i class="bi bi-circle"></i><span>Pengajuan Bahan Baku</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </li><!-- End Charts Nav -->
             </ul>
 
         </aside><!-- End Sidebar-->

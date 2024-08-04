@@ -39,38 +39,38 @@
 
                         @if (!$pengajuanBahan->approved)
                             <div class="dropdown my-auto ms-auto">
-                                <button class="btn btn-light border border-dark" type="button" data-bs-toggle="dropdown"
+                                <button class="btn btn-light border-dark border" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <form action="{{ route('pengajuan-bahan.approve', $pengajuanBahan) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Apakah Anda yakin untuk menyetujui pengajuan ini?');">
-                                            @csrf
+                                    @if (hasRole(App\Enums\JabatanEnum::WarehouseHead->value))
+                                        <li>
+                                            <form action="{{ route('pengajuan-bahan.approve', $pengajuanBahan) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Apakah Anda yakin untuk menyetujui pengajuan ini?');">
+                                                @csrf
 
-                                            <button type="submit" class="dropdown-item border-0">Setujui</button>
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('pengajuan-bahan.edit', $pengajuanBahan) }}"><i
-                                                class="bi bi-pen"></i> Edit</a></li>
-                                    <li>
-                                        <form action="{{ route('pengajuan-bahan.destroy', $pengajuanBahan) }}"
-                                            onsubmit="return confirm('Do you really want to delete the pengajuan?');"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
+                                                <button type="submit" class="dropdown-item border-0">Setujui</button>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('pengajuan-bahan.edit', $pengajuanBahan) }}"><i
+                                                    class="bi bi-pen"></i> Edit</a></li>
+                                        <li>
+                                            <form action="{{ route('pengajuan-bahan.destroy', $pengajuanBahan) }}"
+                                                onsubmit="return confirm('Do you really want to delete the pengajuan?');"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button class="dropdown-item border-0">
-                                                <i class="bi bi-trash"></i> Hapus
-                                            </button>
-                                        </form>
-                                    </li>
+                                                <button class="dropdown-item border-0">
+                                                    <i class="bi bi-trash"></i> Hapus
+                                                </button>
+                                            </form>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         @endif

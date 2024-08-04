@@ -17,8 +17,16 @@ class PengajuanBahanBakuController extends Controller
     public function __construct()
     {
         $this->middleware(
+            sprintf('role:%s|%s', JabatanEnum::ProductionManager->value, JabatanEnum::WarehouseHead->value)
+        )->only(['index', 'show']);
+
+        $this->middleware(
             sprintf('role:%s', JabatanEnum::ProductionManager->value)
-        );
+        )->except(['index', 'show', 'approve']);
+
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::WarehouseHead->value)
+        )->only(['approve']);
     }
 
     /**
