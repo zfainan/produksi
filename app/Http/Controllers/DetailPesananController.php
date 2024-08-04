@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Enums\SatuanEnum;
 use App\Models\DetailJadwalProduksi;
 use App\Models\DetailPesanan;
@@ -15,6 +16,13 @@ use Illuminate\Validation\Rules\Enum;
 
 class DetailPesananController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        );
+    }
+
     /**
      * Show the form for creating a new resource.
      */

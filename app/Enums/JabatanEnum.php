@@ -11,7 +11,7 @@ enum JabatanEnum: string
     use EnumTrait;
 
     case Administrator = 'Administrator';
-    case Owner = 'Owner';
     case ProductionManager = 'Penanggung Jawab Produksi';
     case WarehouseHead = 'Kepala Gudang';
+    case Owner = 'Owner';
 }

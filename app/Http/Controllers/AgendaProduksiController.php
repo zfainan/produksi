@@ -4,12 +4,20 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AgendaProduksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::ProductionManager->value)
+        );
+    }
+
     /**
      * Handle the incoming request.
      */

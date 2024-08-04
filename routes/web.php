@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('bahan-baku', BahanBakuController::class);
 
+        Route::post('bahan-baku/{bahan_baku}/update-stok', [BahanBakuController::class, 'updateStok'])->name('bahan-baku.update-stok');
+
         Route::resource('pelanggan', PelangganController::class);
     });
 

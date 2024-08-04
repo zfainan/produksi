@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Jobs\CreateDetailJadwal;
 use App\Models\JadwalProduksi;
 use App\Models\Pesanan;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\DB;
 
 class JadwalProduksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::ProductionManager->value)
+        );
+    }
+
     /**
      * Display a listing of the resource.
      */

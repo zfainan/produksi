@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Models\JadwalProduksi;
 use App\Models\PengajuanBahanBaku;
 use App\Models\Pesanan;
@@ -13,6 +14,21 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        )->only(['createPesanan', 'generatePesanan']);
+
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::ProductionManager->value)
+        )->only(['createJadwal', 'generateJadwal']);
+
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::WarehouseHead->value)
+        )->only(['createPengajuanBahan', 'generatePengajuanBahan']);
+    }
+
     public function createPesanan()
     {
         return view('reports.pesanan.create');

@@ -59,12 +59,15 @@
 
                     <div class="d-flex">
                         <h5 class="card-title">Detail Pesanan</h5>
-                        <a href="{{ route('detail-pesanan.create', [
-                            'id_pesanan' => $pesanan->id_pesanan,
-                        ]) }}"
-                            class="btn btn-primary my-auto ms-auto">
-                            Tambah Detail Pesanan
-                        </a>
+
+                        @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+                            <a href="{{ route('detail-pesanan.create', [
+                                'id_pesanan' => $pesanan->id_pesanan,
+                            ]) }}"
+                                class="btn btn-primary my-auto ms-auto">
+                                Tambah Detail Pesanan
+                            </a>
+                        @endif
                     </div>
 
                     <div class="table-responsive rounded border p-2">
@@ -84,16 +87,18 @@
                                         <td>{{ $detail->jumlah_order }}</td>
                                         <td>{{ $detail->processing_time }} Hari</td>
                                         <td>
-                                            <form action="{{ route('detail-pesanan.destroy', $detail) }}"
-                                                onsubmit="return confirm('Do you really want to delete the detail?');"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                            @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+                                                <form action="{{ route('detail-pesanan.destroy', $detail) }}"
+                                                    onsubmit="return confirm('Do you really want to delete the detail?');"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button class="btn btn-danger btn-sm">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
+                                                    <button class="btn btn-danger btn-sm">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -111,55 +116,57 @@
                         </table>
                     </div>
 
-                    <div class="d-flex">
-                        <h5 class="card-title">Pengajuan Bahan Baku</h5>
-                        <a href="{{ route('pengajuan-bahan.create', [
-                            'id_pesanan' => $pesanan->id_pesanan,
-                        ]) }}"
-                            class="btn btn-primary my-auto ms-auto">
-                            Buat Pengajuan Bahan
-                        </a>
-                    </div>
+                    @if (hasRole(App\Enums\JabatanEnum::ProductionManager->value))
+                        <div class="d-flex">
+                            <h5 class="card-title">Pengajuan Bahan Baku</h5>
+                            <a href="{{ route('pengajuan-bahan.create', [
+                                'id_pesanan' => $pesanan->id_pesanan,
+                            ]) }}"
+                                class="btn btn-primary my-auto ms-auto">
+                                Buat Pengajuan Bahan
+                            </a>
+                        </div>
 
-                    <div class="table-responsive rounded border p-2">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID Pengajuan</th>
-                                    <th>Bahan</th>
-                                    <th>Jumlah</th>
-                                    <th>Satuan</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($pesanan->pengajuanBahan as $item)
+                        <div class="table-responsive rounded border p-2">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td><a
-                                                href="{{ route('pengajuan-bahan.show', $item) }}">{{ $item->id_pengajuan }}</a>
-                                        </td>
-                                        <td>{{ $item->bahan?->nama_bahan_baku }}</td>
-                                        <td>{{ $item->jumlah }}</td>
-                                        <td>{{ $item->bahan?->satuan }}</td>
-                                        <td>{{ $item->approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
-                                        <td><a href="{{ route('pengajuan-bahan.show', $item) }}">
-                                                <i class="bi bi-eye"></i></a></td>
+                                        <th>ID Pengajuan</th>
+                                        <th>Bahan</th>
+                                        <th>Jumlah</th>
+                                        <th>Satuan</th>
+                                        <th>Status</th>
+                                        <th></th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach ($pesanan->pengajuanBahan as $item)
+                                        <tr>
+                                            <td><a
+                                                    href="{{ route('pengajuan-bahan.show', $item) }}">{{ $item->id_pengajuan }}</a>
+                                            </td>
+                                            <td>{{ $item->bahan?->nama_bahan_baku }}</td>
+                                            <td>{{ $item->jumlah }}</td>
+                                            <td>{{ $item->bahan?->satuan }}</td>
+                                            <td>{{ $item->approved ? 'Disetujui' : 'Belum Disetujui' }}</td>
+                                            <td><a href="{{ route('pengajuan-bahan.show', $item) }}">
+                                                    <i class="bi bi-eye"></i></a></td>
+                                        </tr>
+                                    @endforeach
 
-                                @if (!count($pesanan->pengajuanBahan))
-                                    <tr>
-                                        <td colspan="4" class="border-0">
-                                            <p class="text-center">
-                                                Belum ada data
-                                            </p>
-                                        </td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
+                                    @if (!count($pesanan->pengajuanBahan))
+                                        <tr>
+                                            <td colspan="4" class="border-0">
+                                                <p class="text-center">
+                                                    Belum ada data
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
 
                 </div>
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Enums\KemasanEnum;
 use App\Models\Produk;
 use Illuminate\Http\Request;
@@ -11,6 +12,13 @@ use Illuminate\Validation\Rules\Enum;
 
 class ProdukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        );
+    }
+
     /**
      * Display a listing of the resource.
      */

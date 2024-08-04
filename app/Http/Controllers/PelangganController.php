@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        );
+    }
+
     /**
      * Display a listing of the resource.
      */

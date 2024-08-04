@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Enums\SatuanEnum;
 use App\Models\BahanBaku;
 use Illuminate\Http\Request;
@@ -11,6 +12,21 @@ use Illuminate\Validation\Rules\Enum;
 
 class BahanBakuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        )->only(['create', 'store', 'edit', 'update', 'destroy']);
+
+        $this->middleware(
+            sprintf('role:%s|%s', JabatanEnum::Administrator->value, JabatanEnum::WarehouseHead->value)
+        )->only(['index', 'show']);
+
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::WarehouseHead->value)
+        )->only('updateStok');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -88,5 +104,17 @@ class BahanBakuController extends Controller
         $bahanBaku->delete();
 
         return redirect()->route('bahan-baku.index')->with('success', 'Bahan Baku deleted successfully.');
+    }
+
+    public function updateStok(Request $request, BahanBaku $bahanBaku)
+    {
+        $request->validate([
+            'stok' => 'required|integer',
+        ]);
+
+        $bahanBaku->stok = $request->stok;
+        $bahanBaku->save();
+
+        return redirect()->route('bahan-baku.show', $bahanBaku)->with('success', 'Bahan Baku updated successfully.');
     }
 }

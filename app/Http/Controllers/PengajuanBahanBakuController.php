@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Models\BahanBaku;
 use App\Models\DetailProduk;
 use App\Models\PengajuanBahanBaku;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\DB;
 
 class PengajuanBahanBakuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::ProductionManager->value)
+        );
+    }
+
     /**
      * Display a listing of the resource.
      */

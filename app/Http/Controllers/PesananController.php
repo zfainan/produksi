@@ -4,12 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\JabatanEnum;
 use App\Models\Pelanggan;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            sprintf('role:%s|%s', JabatanEnum::Administrator->value, JabatanEnum::ProductionManager->value)
+        )->only(['index', 'show']);
+
+        $this->middleware(
+            sprintf('role:%s', JabatanEnum::Administrator->value)
+        )->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */

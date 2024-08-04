@@ -12,7 +12,9 @@
                 </ol>
             </nav>
         </div><!-- End Page Title -->
-        <a class="btn btn-success mb-auto ms-auto" href="{{ route('bahan-baku.create') }}"> Tambah Bahan Baku</a>
+        @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+            <a class="btn btn-success mb-auto ms-auto" href="{{ route('bahan-baku.create') }}"> Tambah Bahan Baku</a>
+        @endif
     </div>
 
     <section class="section">
@@ -47,17 +49,20 @@
                                     <td class="d-flex justify-content-center">
                                         <a class="btn btn-sm btn-outline-info me-1"
                                             href="{{ route('bahan-baku.show', $item) }}"><i class="bi bi-eye"></i></a>
-                                        <a class="btn btn-sm btn-outline-warning me-1"
-                                            href="{{ route('bahan-baku.edit', $item) }}"><i class="bi bi-pen"></i></a>
 
-                                        <form
-                                            onsubmit="return confirm('Do you really want to delete user {{ $item->nama }}?');"
-                                            action="{{ route('bahan-baku.destroy', $item) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger me-1"><i
-                                                    class="bi bi-trash"></i></button>
-                                        </form>
+                                        @if (hasRole(App\Enums\JabatanEnum::Administrator->value))
+                                            <a class="btn btn-sm btn-outline-warning me-1"
+                                                href="{{ route('bahan-baku.edit', $item) }}"><i class="bi bi-pen"></i></a>
+
+                                            <form
+                                                onsubmit="return confirm('Do you really want to delete user {{ $item->nama }}?');"
+                                                action="{{ route('bahan-baku.destroy', $item) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger me-1"><i
+                                                        class="bi bi-trash"></i></button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
